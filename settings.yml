@@ -1,0 +1,24 @@
+okta_token: 00PCmeGo2-VF0_08qrrRAyghw_DCYC4gGeK05m2hid
+okta_organization_url: dev-505359.oktapreview.com
+casb_login_password: hDs%p28RYI1r
+casb_login_name: mattia@nc2.com
+casb_ligin_form_action_url: https://my.skyfence.com/cm/j_spring_security_check
+casb_users_csv_url: https://my.skyfence.com/cm/rs/0/human_risk/accounts/reports/csv?search=%2BriskScore%3A(%22%5B1%20TO%20*%5D%22)&sortBy=riskScore&sortDirection=DESC
+application_directory: /var/okta_casb
+logs_locations: /var/okta_casb/logs
+database_path: /var/okta_casb/database.db
+
+# Map each risk score range to one okta group or to a predefined policy.
+# Predefined policies are:suspend
+# suspend: suspended users Can't log in to Okta. Their group and app assignments are retained
+
+risk_score_map:
+  # from 100  to 250. mapped to the okta group Risk_level_1
+  100-250: Risk_level_1
+  # from 251 up to 500. mapped to the okta group Risk_level_2
+  251-500: Risk_level_2
+  # for 501 and above. Mapped to the 'suspend' predefined policy
+  501+: suspend
+terminate_user_session_after_policy_change: true
+# Download the risk score from Forcepoint CASB every 'interval-time' minutes
+interval_time: 10
